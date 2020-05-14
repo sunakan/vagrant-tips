@@ -1,5 +1,19 @@
 = Vagrant tips for CentOS
 
+== 挙動確認した時のソフトウェアのバージョン
+
+* 別に必ず合わせる必要はない
+
+[cols="1,1", options="header"]
+|===
+|ソフトウェア名|バージョン
+|Vagrant|2.2.9
+|VirtualBox|6.1
+|GNU Make|3.81
+|===
+
+== 立ち上げ
+
 ----
 $ make up
 ----
@@ -10,7 +24,11 @@ $ make up
 $ vagrant rsync-auto
 ----
 
-== 各VMをansible用VMでプロビジョニング
+* このrsync-autoを当たり前にする時は以下を肝に銘じとくと事故りにくい
+** VMの中では編集やgitコマンドを打たない(だからVMにgitもvimも不要)
+** あくまで何かを動かす環境(Docker等)
+
+== 各VMをAnsible用VMでプロビジョニング
 
 ----
 $ make provision
