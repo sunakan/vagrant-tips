@@ -6,8 +6,8 @@ VAGRANT_BOX_CENTOS  = 'bento/centos-7'
 VAGRANT_BOX_DEFAULT = VAGRANT_BOX_CENTOS
 
 vm_specs = [
-  { name: 'web', ip: '192.168.3.11', cpus: 1, memory: 512*2, sync_dir: 'web-codes' },
-  { name: 'db',  ip: '192.168.3.12', cpus: 1, memory: 512*2, sync_dir: 'db-codes' },
+  { name: 'web1', ip: '192.168.3.11', cpus: 1, memory: 512*2, sync_dir: 'web' },
+  { name: 'db1',  ip: '192.168.3.21', cpus: 1, memory: 512*2, sync_dir: 'db' },
 ]
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -30,9 +30,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.memory = spec[:memory]
       end
       if dir = spec[:sync_dir]
-        machine.vm.synced_folder './' + dir, '/home/vagrant/' + dir,
+        machine.vm.synced_folder "./#{dir}", "/home/vagrant/#{dir}",
           create: true, type: :rsync, owner: :vagrant, group: :vagrant,
-          rsync__exclude: ['*.swp']
+          rsync__exclude: ['*.swp', '.git/']
       end
     end
   end
@@ -51,13 +51,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vb.cpus   = 1
     end
     machine.vm.provision 'shell', privileged: false, inline: <<-SHELL
-      sudo apt update
-      sudo apt install --assume-yes python3-pip make sshpass
+      sudo yum update
+      sudo yum install --assumeyes python3-pip make sshpass
       pip3 install --user ansible
     SHELL
     machine.vm.synced_folder './ansible', '/home/vagrant/ansible',
       create: true, type: :rsync, owner: :vagrant, group: :vagrant,
-      rsync__exclude: ['*.swp']
+      rsync__exclude: ['*.swp', '.git/']
   end
 
   ##############################################################################

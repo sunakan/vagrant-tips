@@ -1,0 +1,17 @@
+= Vagrant tips for CentOS
+
+----
+$ make up
+----
+
+== hostから一方通行同期(rsync)の自動化
+
+----
+$ vagrant rsync-auto
+----
+
+== 各VMをansible用VMでプロビジョニング
+
+----
+$ make provision
+----

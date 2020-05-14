@@ -1,0 +1,9 @@
+---
+
+- name: 開発でよく使うパッケージを入れる（Redhat）
+  become: yes
+  yum:
+    name:
+      - tree
+      - make
+    update_cache: yes

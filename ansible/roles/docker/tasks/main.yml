@@ -1,0 +1,13 @@
+---
+
+- include_tasks: redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: dockerグループにvagrant userを追加
+  become: yes
+  user:
+    name: vagrant
+    groups: docker

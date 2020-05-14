@@ -1,0 +1,9 @@
+[web]
+web1
+
+[db]
+db1
+
+[all:children]
+web
+db
