@@ -30,6 +30,8 @@ rectangle "db1" {
   node "mysql\n3306:3306" as mysql_container {
     DEV_MYSQL(mysql,"",database, White) #SkyBlue
   }
+  node "migration\ngolang" as migration
+  database "docker\nvolume" as volume #DeepSkyBlue
 }
 
 rectangle "web1" <<vm>> {
@@ -44,4 +46,6 @@ ansible -up-> web1
 db1 -le-> ruby
 ruby -> nginx
 nginx -> ruby
+migration -up-> mysql_container
+volume -up- mysql_container
 @enduml
