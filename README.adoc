@@ -1,5 +1,9 @@
 = Vagrant tips for CentOS
 
+== 図
+
+image::./docs/diagram.png[]
+
 == 挙動確認した時のソフトウェアのバージョン
 
 * 別に必ず合わせる必要はない
