@@ -1,6 +1,6 @@
 ---
 
-- name: Dockerに必要なパッケージを入れる
+- name: Install package for Docker
   become: yes
   yum:
     name:
@@ -17,8 +17,14 @@
   command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
   when: docker_ce_repo.stat.exists == false
 
-- name: Dockerをインストール
+- name: Install Docker
   become: yes
   yum:
     name:
       - docker-ce
+
+- name: Start docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
