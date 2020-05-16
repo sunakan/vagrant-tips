@@ -57,7 +57,6 @@ export MYSQL_URL='mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@tcp(${DOCKER_MYSQL_HOS
 define docker-migrate
 	docker run \
 		--rm \
-		--interactive \
 		--tty \
 		--network ${DOCKER_NETWORK_NAME} \
 		--hostname migrate \
@@ -92,7 +91,6 @@ create-migration-files:
 define mysql-client
 	docker run \
 		--rm \
-		--interactive \
 		--tty \
 		--user `id -u`:`id -g` \
 		--network ${DOCKER_NETWORK_NAME} \
@@ -124,3 +122,12 @@ select-all:
 
 truncate:
 	$(call mysql-client) bash -c "echo 'TRUNCATE TABLE publisher;' | $(call mysql-connection)"
+
+################################################################################
+# 全自動セットアップ
+################################################################################
+setup-full:
+	make up
+	sleep 10
+	make migrate-up
+	make init-records

@@ -9,6 +9,7 @@ export MYSQL_PASSWORD=hoge-pass
 
 define ruby-app
 	docker run \
+		--detach \
 		--rm \
 		--interactive \
 		--tty \

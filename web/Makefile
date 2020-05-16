@@ -5,16 +5,26 @@ network:
 		|| docker network create ${DOCKER_NETWORK_NAME}
 
 up: network
-	make nginx-up
-	make ruby-app-up
+	make up-nginx
+	make up-ruby-app
 
-nginx-up: network
+up-nginx: network
 	cd nginx && make up DOCKER_NETWORK_NAME=${DOCKER_NETWORK_NAME}
 
-ruby-app-up: network
+build-ruby-app:
+	cd ruby && make build
+
+up-ruby-app: network
 	cd ruby && make up DOCKER_NETWORK_NAME=${DOCKER_NETWORK_NAME}
 
 clean:
 	cd nginx && make clean
 	cd ruby  && make clean
 	docker network ls --quiet --filter 'name=${DOCKER_NETWORK_NAME}' | xargs -I {} docker network rm {}
+
+################################################################################
+# 全自動セットアップ
+################################################################################
+setup-full:
+	make build-ruby-app
+	make up

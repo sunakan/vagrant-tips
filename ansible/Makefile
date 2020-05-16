@@ -1,15 +1,15 @@
 export ENVIRONMENT=vagrant
 
 version:
-	ansible-playbook --version
+	~/.local/bin/ansible-playbook --version
 
 dry-provision:
-	ansible-playbook \
+	~/.local/bin/ansible-playbook  \
 		--inventory ./inventories/${ENVIRONMENT}/hosts \
 		--check \
 		./main.yml
 
 provision:
-	ansible-playbook \
+	~/.local/bin/ansible-playbook \
 		--inventory ./inventories/${ENVIRONMENT}/hosts \
 		./main.yml

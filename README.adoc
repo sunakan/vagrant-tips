@@ -12,10 +12,19 @@
 |GNU Make|3.81
 |===
 
-== 立ち上げ
+== 立ち上げ/プロビジョニング/セットアップ
 
+.Recommend
 ----
 $ make up
+$ make provision-each-vm
+$ make setup-full
+----
+
+or
+
+----
+$ make
 ----
 
 == hostから一方通行同期(rsync)の自動化
@@ -27,9 +36,3 @@ $ vagrant rsync-auto
 * このrsync-autoを当たり前にする時は以下を肝に銘じとくと事故りにくい
 ** VMの中では編集やgitコマンドを打たない(だからVMにgitもvimも不要)
 ** あくまで何かを動かす環境(Docker等)
-
-== 各VMをAnsible用VMでプロビジョニング
-
-----
-$ make provision
-----
