@@ -32,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       if dir = spec[:sync_dir]
         machine.vm.synced_folder "./#{dir}", "/home/vagrant/#{dir}",
           create: true, type: :rsync, owner: :vagrant, group: :vagrant,
-          rsync__exclude: ['*.swp', '.git/']
+          rsync__exclude: ['*.swp', '.git/', '.idea*']
       end
     end
   end
