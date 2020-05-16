@@ -46,7 +46,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     machine.vm.network 'private_network', ip: '192.168.3.123'
     machine.vm.provider :virtualbox do |vb|
       vb.gui    = false
-      vb.name   = machine.vm.hostname
+      vb.name   = machine.vm.hostname + '-vagrant-tips'
       vb.memory = 512 * 2
       vb.cpus   = 1
     end
